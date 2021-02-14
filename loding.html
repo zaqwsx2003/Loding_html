@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="kr">
+	<head>
+	<meta charset="UTF-8">
+	<title>로딩바</title>
+
+<style rel="stylesheet">
+body {
+  height: 100vh;
+  background: linear-gradient(to bottom, #F9F9F9, #96908a);
+  font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+}
+
+h1 {
+  color: #757574;
+  font-size: 1.4em;
+  margin: 10px 0;
+  letter-spacing: 3px;
+}
+
+p {
+  font-size: 0.9em;
+  color: #83867E;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-wrap {
+  position: relative;
+  height: 30px;
+}
+.progress-wrap .bar {
+  width: 300px;
+  height: 20px;
+  background: #C0BFBC;
+  border-radius: 20px;
+  box-shadow: inset 0.5px 0.5px 1px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+.progress-wrap .run {
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(to bottom, #d4dbcd, #B6CBA1);
+  border-radius: 20px;
+  box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.1);
+  transition: all linear 0.2s;
+}
+.progress-wrap .number {
+  position: absolute;
+  text-align: center;
+  line-height: 25px;
+  color: #757574;
+  font-size: 0.8em;
+  width: 40px;
+  height: 25px;
+  border-radius: 20px;
+  background: linear-gradient(to bottom, #E6E5E2, #C0BFBC);
+  top: -100%;
+  transform: translateX(-50%);
+  transition: all linear 0.2s;
+}
+.progress-wrap .number:after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 5px solid #C0BFBC;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  position: absolute;
+  box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.1);
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+}
+
+</style>
+</head>
+<body>
+
+
+<div class="container"> 
+  <div class="progress-wrap">
+    <div class="bar">
+      <div class="run"></div>
+    </div>
+    <div class="number">0%</div>
+  </div>
+  <h1>Loading</h1>
+  <p>Please wait...</p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+<script type="text/javascript">
+$('document').ready(function(){
+  var timer = 10;
+  var width = 0;
+  var load  = setInterval(function(){
+    width += 1;
+     $('.run').css('width',width + "%");
+      
+    if(width >= 100) {
+    clearInterval(load);
+    $('h1').html('DONE');
+    $('p').css('visibility','hidden');
+  }
+    $('.number').css('left',width + '%');
+    $('.number').html(width + '%');
+  },timer*1000 / 50);
+  
+
+});
+  
+
+</script>
+</body>
+</html>
